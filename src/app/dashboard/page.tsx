@@ -43,7 +43,12 @@ export default function Dashboard() {
       }
 
       const data = await res.json();
-      setQuizzes(data);
+      if (Array.isArray(data)) {
+        setQuizzes(data);
+      } else {
+        console.error('API did not return an array:', data);
+        setQuizzes([]);
+      }
     } catch (err) {
       console.error(err);
     } finally {

@@ -51,7 +51,10 @@ export default function QuizPage() {
         return;
       }
       const data = await res.json();
-      const currentQuiz = data.find((q: any) => q.id.toString() === pk);
+      let currentQuiz = null;
+      if (Array.isArray(data)) {
+        currentQuiz = data.find((q: any) => q.id.toString() === pk);
+      }
       
       if (currentQuiz && currentQuiz.questionsanswers) {
         const ids = currentQuiz.questionsanswers.map((qa: any) => qa.id);
