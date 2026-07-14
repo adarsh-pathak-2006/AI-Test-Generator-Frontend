@@ -43,7 +43,7 @@ export default function QuizPage() {
   const fetchQuizMeta = async () => {
     const token = localStorage.getItem('access');
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/dashboard/', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/dashboard/`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) {
@@ -71,7 +71,7 @@ export default function QuizPage() {
     setFeedback(null);
     setSelectedOption('');
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/quiz/${pk}/${ck}/`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/quiz/${pk}/${ck}/`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -98,7 +98,7 @@ export default function QuizPage() {
     if (selectedOption === currentQuestion?.option4) letter = 'D';
 
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/quiz/${pk}/${ck}/`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/quiz/${pk}/${ck}/`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,

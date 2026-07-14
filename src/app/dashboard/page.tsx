@@ -30,7 +30,7 @@ export default function Dashboard() {
     }
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/dashboard/', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/dashboard/`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -59,7 +59,7 @@ export default function Dashboard() {
     const token = localStorage.getItem('access');
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/dashboard/', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/dashboard/`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
