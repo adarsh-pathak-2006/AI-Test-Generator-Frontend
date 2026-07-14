@@ -9,6 +9,8 @@ interface Question {
   option2: string;
   option3: string;
   option4: string;
+  answer: string | null;
+  mark: string;
 }
 
 export default function QuizPage() {
@@ -59,6 +61,7 @@ export default function QuizPage() {
       if (currentQuiz && currentQuiz.questionsanswers) {
         const ids = currentQuiz.questionsanswers.map((qa: any) => qa.id);
         setQuestionIds(ids);
+        setScore(currentQuiz.score || 0);
       } else {
         // Quiz not found or no questions
         setQuizFinished(true);
@@ -113,8 +116,12 @@ export default function QuizPage() {
       const data = await res.json();
       const isCorrect = data.message === 'correct answer';
       setFeedback({ message: data.message, correct: isCorrect });
-      if (isCorrect) setScore(s => s + 1);
-
+      
+      // If we got it right and it wasn't already marked right
+      if (isCorrect && currentQuestion?.mark !== 'R') {
+        setScore(s => s + 1);
+        setCurrentQuestion(prev => prev ? { ...prev, mark: 'R' } : null);
+      }
     } catch (err) {
       console.error(err);
     } finally {

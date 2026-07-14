@@ -9,6 +9,7 @@ interface Quiz {
   document: string;
   created_at: string;
   questionsanswers: { id: number }[];
+  score: number;
 }
 
 export default function Dashboard() {
@@ -133,7 +134,7 @@ export default function Dashboard() {
                     {quiz.document}
                   </p>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--accent)' }}>{quiz.questionsanswers.length} Questions</span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--accent)' }}>Score: {quiz.score} / {quiz.questionsanswers.length}</span>
                     <Link href={`/quiz/${quiz.id}`} className="btn-secondary" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
                       Take Quiz
                     </Link>
